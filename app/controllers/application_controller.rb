@@ -19,6 +19,7 @@ class ApplicationController < ActionController::API
             rescue JWT::DecodeError
                 nil
             end
+        end
     end
 
     def current_user
