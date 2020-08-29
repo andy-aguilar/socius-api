@@ -10,6 +10,12 @@ Club.destroy_all
 Run.destroy_all
 
 
-User.create({first_name: 'Andy', last_name: 'Aguilar', email_address: 'aaguil3@gmail.com', password: '@Boliando86'})
+andy = User.create({first_name: 'Andy', last_name: 'Aguilar', email_address: 'aaguil3@gmail.com', password: '@Boliando86'})
+kristin = User.create({first_name: 'Kristin', last_name: 'Schallhorn', email_address: 'kristin@kristin.com', password: "#Rapido318"})
+
+10.times do 
+    kristin.runs << Run.create({name: Faker::Coffee.blend_name, distance: rand(11), complete: [true, false].sample})
+    andy.runs << Run.create({name: Faker::Quote.most_interesting_man_in_the_world, distance: rand(11), complete: [true, false].sample})
+end
 
 puts "HOLY SHIT IT WORKED!"
