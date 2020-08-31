@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # resources :user_runs
   # resources :runs
   resources :users, only: [:create]
-  resources :runs, only: [:index]
+  resources :runs, only: [:index, :create]
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
