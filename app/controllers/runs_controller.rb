@@ -16,10 +16,10 @@ class RunsController < ApplicationController
             render json: run, include: [:users]
         else
             render json: { error: 'failed to create run'}, status: :not_acceptable
-        end
-
-        
+        end     
     end
+
+    
 
     private
 
