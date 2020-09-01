@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_201813) do
+ActiveRecord::Schema.define(version: 2020_09_01_095545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "club_runs", force: :cascade do |t|
-    t.bigint "club_id", null: false
-    t.bigint "run_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["club_id"], name: "index_club_runs_on_club_id"
-    t.index ["run_id"], name: "index_club_runs_on_run_id"
-  end
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -38,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_08_31_201813) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "date"
+    t.integer "user_owner_id"
   end
 
   create_table "user_clubs", force: :cascade do |t|
@@ -67,8 +59,6 @@ ActiveRecord::Schema.define(version: 2020_08_31_201813) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "club_runs", "clubs"
-  add_foreign_key "club_runs", "runs"
   add_foreign_key "user_clubs", "clubs"
   add_foreign_key "user_clubs", "users"
   add_foreign_key "user_runs", "runs"

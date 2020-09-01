@@ -1,2 +1,0 @@
-class ClubRunsController < ApplicationController
-end

@@ -11,7 +11,7 @@ class RunsController < ApplicationController
         user = User.find_by(id: run_params[:user_id])
 
         if user
-            run = Run.create(name: run_params[:name], date: run_params[:date], distance: run_params[:distance])
+            run = Run.create(name: run_params[:name], date: run_params[:date], distance: run_params[:distance], user_owner_id: run_params[:user_id])
             run.users << user
             render json: run, include: [:users]
         else
