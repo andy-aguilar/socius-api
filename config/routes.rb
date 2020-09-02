@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # resources :clubs
   # resources :user_runs
   # resources :runs
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
   resources :runs, only: [:index, :create]
   resources :user_runs, only: [:create]
   post '/login', to: 'auth#create'

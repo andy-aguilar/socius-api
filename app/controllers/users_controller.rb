@@ -11,6 +11,15 @@ class UsersController < ApplicationController
         end
     end
 
+    def show
+        user = User.find(params[:id])
+        if user
+            render json: user
+        else
+            render json: {error: 'failed to find user'}
+        end
+    end
+
     private
 
     def user_params
