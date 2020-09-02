@@ -7,11 +7,11 @@ class RunsController < ApplicationController
 
     def create
         # run_params[:time] = DateTime.strptime(run_params[:time], '%Y-%m-%dT%H:%M')
-        # byebug
-        user = User.find_by(id: run_params[:user_id])
+        user = User.find_by(id: run_params[:user_owner_id])
 
         if user
-            run = Run.create(name: run_params[:name], date: run_params[:date], distance: run_params[:distance], user_owner_id: run_params[:user_id])
+            run = Run.create(run_params)
+            
             run.users << user
             render json: run, include: [:users]
         else
@@ -24,6 +24,6 @@ class RunsController < ApplicationController
     private
 
     def run_params
-        params.require(:run).permit(:name, :date, :distance, :user_id)
+        params.require(:run).permit(:name, :date, :distance, :user_owner_id, :latitude, :longitude, :zoom)
     end
 end
