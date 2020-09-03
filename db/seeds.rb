@@ -13,6 +13,10 @@ Run.destroy_all
 
 andy = User.create({first_name: 'Andy', last_name: 'Aguilar', email_address: 'aaguil3@gmail.com', password: '@Boliando86'})
 kristin = User.create({first_name: 'Kristin', last_name: 'Schallhorn', email_address: 'kristin@kristin.com', password: "#Rapido318"})
+valerie = User.create({first_name: 'Valerie', last_name: 'Aguilar', email_address: 'valerie@valerie.com', password: 'password'})
+ali = User.create({first_name: 'Alexia', last_name: 'Aguilar', email_address: 'ali@ali.com', password: 'password'})
+mom = User.create({first_name: 'Kattya', last_name: 'Aguilar', email_address: 'mom@mom.com', password: 'password'})
+dad = User.create({first_name: 'Humberto', last_name: 'Aguilar', email_address: 'dad@dad.com', password: 'password'})
 
 def day
     rand(27) + 3
