@@ -30,16 +30,13 @@ class UsersController < ApplicationController
     end
 
     def search
-        byebug
         users_first = User.where("lower(first_name) LIKE ?", "%#{params[:query].downcase}%")
         users_last = User.where("lower(last_name) LIKE ?", "%#{params[:query].downcase}%")
         users_email = User.where("lower(email_address) LIKE ?", "%#{params[:query].downcase}%")
 
-        users_concat = users_first + users_email + users_last
-
-        users_final = users_concat.uniq
-        
-        if users_final.length > 0
+        if users_first || users_last || users_email
+            users_concat = users_first + users_email + users_last
+            users_final = users_concat.uniq
             render json: users_final
         else
             rendser json: {message: 'There are no users matching your search query.'}
