@@ -4,8 +4,8 @@ class User < ApplicationRecord
     has_many :clubs, through: :user_clubs
     has_many :runs, through: :user_runs
     validates :email_address, uniqueness: { case_sensitive: false }
-    # has_many :friendships
-    # has_many :friends, :through => :friendships
+    has_many :friendships
+    has_many :friends, :through => :friendships
 
 
     has_many :friend_requests_sent, ->{where(status: false)}, class_name: 'Friendship'
@@ -30,13 +30,6 @@ class User < ApplicationRecord
     
     def all_friends 
         self.requests_accepted + self.requests_sent_accepted
-    end
-
-    def requests_received_serialized
-        requests_serialized = self.friend_requests_received.map { |request| 
-        
-            request.merge(user: User.find(request[:user_id]))
-        }
     end
 
 
