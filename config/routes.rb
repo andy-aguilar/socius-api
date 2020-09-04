@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :friendships
+  resources :friendships, only: [:create, :show]
   # resources :club_runs
   # resources :user_clubs
   # resources :clubs
