@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     def show
         user = User.find(params[:id])
         if user
-            render json: user
+            render json: user.with_attached_image
         else
             render json: {error: 'failed to find user'}
         end
@@ -22,10 +22,10 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-        if user.update(user_params)
+        if UpdateUserService.new(user, user_params)
             render json: user
         else
-            render json: {error: 'failed to update user'}
+            render json: user.errors, status: :unprocessable_entity
         end
     end
 
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email_address, :password, :first_name, :last_name)
+        params.require(:user).permit(:email_address, :password, :first_name, :last_name, :image)
     end
 
 end

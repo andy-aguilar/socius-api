@@ -6,6 +6,7 @@ class User < ApplicationRecord
     validates :email_address, uniqueness: { case_sensitive: false }
     has_many :friendships
     has_many :friends, :through => :friendships
+    has_one_attached :image
 
 
     has_many :friend_requests_sent, ->{where(status: false)}, class_name: 'Friendship'
@@ -25,7 +26,6 @@ class User < ApplicationRecord
     has_many :requests_sent_accepted, through: :friend_requests_sent_accepted, source: :friend
 
     has_secure_password
-    searchkick
 
     
     def all_friends 
