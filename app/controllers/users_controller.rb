@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     def show
         user = User.find(params[:id])
         if user
-            render json: user.with_attached_image
+            render json: user
         else
             render json: {error: 'failed to find user'}
         end
