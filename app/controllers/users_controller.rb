@@ -22,11 +22,21 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-        if UpdateUserService.new(user, user_params)
+
+        if params[:image].length > 0
+            
+            blob = ActiveStorage::Blob.create_after_upload!(
+                io: StringIO.new((Base64.decode64(params[:image].split(",")[1]))),
+                filename: "user.png",
+                content_type: "image/png",
+            )
+            user.image.attach(blob)
             render json: user
         else
-            render json: user.errors, status: :unprocessable_entity
+            user.update(user_params)
+            render json: user
         end
+
     end
 
     def search
@@ -47,7 +57,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email_address, :password, :first_name, :last_name, :image)
+        params.require(:user).permit(:email_address, :password, :first_name, :last_name)
     end
 
 end

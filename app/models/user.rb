@@ -29,7 +29,13 @@ class User < ApplicationRecord
 
     
     def all_friends 
-        self.requests_accepted + self.requests_sent_accepted
+        accepted = self.requests_accepted.map { |friend|
+            UserSerializer.new(friend)
+        } 
+        sent_accepted = self.requests_sent_accepted.map { |friend|
+            UserSerializer.new(friend)
+        }
+        return accepted + sent_accepted
     end
 
 
