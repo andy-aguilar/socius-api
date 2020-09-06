@@ -19,7 +19,18 @@ class RunsController < ApplicationController
         end     
     end
 
-    
+    def user_runs
+        user = User.find(params[:id])
+        runs = Run.where(user_owner_id: user.id)
+        render json: runs, include: [:users]
+    end
+
+    def user_friend_runs
+        user = User.find(params[:id])
+        friend_ids = user.all_friend_ids
+        runs = Run.where(user_owner_id: user.all_friend_ids)
+        render json: runs, include: [:users]
+    end
 
     private
 

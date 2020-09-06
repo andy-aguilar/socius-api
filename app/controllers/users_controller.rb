@@ -24,7 +24,7 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
 
         if params[:image].length > 0
-            
+            byebug
             blob = ActiveStorage::Blob.create_after_upload!(
                 io: StringIO.new((Base64.decode64(params[:image].split(",")[1]))),
                 filename: "user.png",

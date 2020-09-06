@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile'
   get '/search/:query', to: 'users#search'
   get '/friendships/requests/:id', to: 'friendships#requests'
+  get ''
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

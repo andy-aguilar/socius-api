@@ -38,5 +38,16 @@ class User < ApplicationRecord
         return accepted + sent_accepted
     end
 
+    def all_friend_ids
+        accepted = self.requests_accepted.map { |friend|
+            friend.id
+        }
+        sent_accepted = self.requests_sent_accepted.map { |friend|
+            friend.id
+        }
+        return accepted + sent_accepted
+    end
+
+
 
 end
