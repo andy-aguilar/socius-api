@@ -13,6 +13,8 @@ class UsersController < ApplicationController
 
     def show
         user = User.find(params[:id])
+        #runs = user.runs.where('date < ?', Date.today).length()
+        byebug
         if user
             render json: user
         else
