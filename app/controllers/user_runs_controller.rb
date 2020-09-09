@@ -14,6 +14,7 @@ class UserRunsController < ApplicationController
         
     end
 
+
     private
 
     def user_run_params

@@ -54,6 +54,11 @@ class RunsController < ApplicationController
         end
     end
 
+    # def leave
+    #     user = User.find(params[:user])
+    #     run = Run.find(params[:run])
+    # end
+
     private
 
     def run_params
