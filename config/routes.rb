@@ -17,5 +17,9 @@ Rails.application.routes.draw do
   post '/runs/filter/:id', to: 'runs#filtered_runs'
   get '/runs/userhistory/:id', to: 'runs#user_history'
   #
+
+  delete '/runs/leave/:user/:run', to: 'runs#leave'
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

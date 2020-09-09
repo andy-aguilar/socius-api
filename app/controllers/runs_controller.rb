@@ -54,10 +54,17 @@ class RunsController < ApplicationController
         end
     end
 
-    # def leave
-    #     user = User.find(params[:user])
-    #     run = Run.find(params[:run])
-    # end
+    def leave
+        user = User.find(params[:user])
+        run = Run.find(params[:run])
+
+        if user && run
+            run.users.delete(user)
+            render json: run, include: [:users]
+        else
+            render json: { errror: "failed to delete"}
+        end
+    end
 
     private
 
