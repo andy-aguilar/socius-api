@@ -5,6 +5,11 @@ class RunsController < ApplicationController
         render json: runs, include: [:users]
     end
 
+    def show
+        run = Run.find(params[:id])
+        render json: run
+    end
+
     def create
         user = User.find_by(id: run_params[:user_owner_id])
 
@@ -20,7 +25,7 @@ class RunsController < ApplicationController
 
     def user_runs
         user = User.find(params[:id])
-        runs = Run.where(user_owner_id: user.id).where('date >= ?', Date.today).order(:date)
+        runs = Run.where(user_owner_id: user.id).where('date >= ?', Date.today).order(:date).limit(5)
         render json: runs, include: [:users]
     end
 
@@ -72,6 +77,16 @@ class RunsController < ApplicationController
 
         render json: {future_runs: future_runs, past_runs: past_runs, future_planned_runs: future_planned_runs, created_runs: created_runs, all_runs: all_runs, friends: friends, future_joined_runs: future_joined_runs  }
 
+    end
+
+    def update
+        run =  Run.find(params[:id])
+
+        if run.update(run_params)
+            render json: run, include: [:users]
+        else
+            render json: { error: "couldn't update that run."}
+        end
     end
 
     private

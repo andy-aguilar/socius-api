@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # resources :user_runs
   # resources :runs
   resources :users, only: [:create, :show, :update]
-  resources :runs, only: [:index, :create]
+  resources :runs, only: [:index, :create, :show, :update]
   resources :user_runs, only: [:create]
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
