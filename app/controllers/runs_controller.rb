@@ -33,14 +33,7 @@ class RunsController < ApplicationController
     def user_friend_runs
         user = User.find(params[:id])
         friend_ids = user.all_friend_ids
-        runs = Run.future_run.where(user_owner_id: user.all_friend_ids).order(:date).limit(5)
-        render json: runs, include: [:users]
-    end
-
-    def user_friend_more_runs
-        user = User.find(params[:id])
-        friend_ids = user.all_friend_ids
-        runs = Run.future_run.where(user_owner_id: user.all_friend_ids).order(:date).offset(5)
+        runs = Run.future_run.where(user_owner_id: user.all_friend_ids).order(:date).limit(3).offset(params[:offset])
         render json: runs, include: [:users]
     end
 
@@ -64,6 +57,21 @@ class RunsController < ApplicationController
         else
             render json: { errror: "failed to delete"}
         end
+    end
+
+    def run_stats
+        user = User.find(params[:user])
+        
+        future_runs = user.runs.where("date >= ?", Date.today).length()
+        past_runs = user.runs.where("date < ?", Date.today).length()
+        future_planned_runs = Run.where(user_owner_id: user.id).where('date >= ?', Date.today).length()
+        future_joined_runs = Run.where('user_owner_id != ?', user.id).where('date >= ?', Date.today).length()
+        created_runs = Run.where(user_owner_id: user.id).length()
+        all_runs = user.runs.length()
+        friends = user.all_friend_ids.length()
+
+        render json: {future_runs: future_runs, past_runs: past_runs, future_planned_runs: future_planned_runs, created_runs: created_runs, all_runs: all_runs, friends: friends, future_joined_runs: future_joined_runs  }
+
     end
 
     private

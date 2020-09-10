@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   get '/search/:query', to: 'users#search'
   get '/friendships/requests/:id', to: 'friendships#requests'
   get '/runs/user/:id', to: 'runs#user_runs'
-  get '/runs/friends/:id', to: 'runs#user_friend_runs'
+  get '/runs/friends/:id/:offset', to: 'runs#user_friend_runs'
   post '/runs/filter/:id', to: 'runs#filtered_runs'
   get '/runs/userhistory/:id', to: 'runs#user_history'
+  get '/runs/userstats/:user', to: 'runs#run_stats'
   #
 
   delete '/runs/leave/:user/:run', to: 'runs#leave'
